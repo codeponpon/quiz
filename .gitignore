@@ -72,5 +72,8 @@ build-iPhoneSimulator/
 /yarn-error.log
 
 .byebug_history
+<<<<<<< HEAD
 
+=======
+>>>>>>> Ignore .idea/ directory
 .idea/
