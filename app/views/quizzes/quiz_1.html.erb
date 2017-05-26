@@ -1,5 +1,36 @@
 <h1>Quizzes#quiz_1</h1>
+<p>Given 8 balls aligned horizontally and numbered 1, 2, 3, 4, 5, 6, 7, 8 from left to right. We are going to
+  perform the following N operations in the given order.</p>
+<ul>
+  <li>Exchange A_1th ball from the left and B_1th ball from the left</li>
+  <li>Exchange A_2th ball from the left and B_2th ball from the left.</li>
+  <li>...</li>
+  <li>Exchange A_Nth ball from the left and B_Nth ball from the left.</li>
+</ul>
+<p>This series of N operations stated above will be one set.</p>
+<p>Your task is to output the ultimate arrangement of these balls after repeating K sets.</p>
 
+<h3>Input</h3>
+<p>Input will be given in the following format from Standard Input:</p>
+<p>N K</p>
+<p>A_1 B_1</p>
+<p>A_2 B_2</p>
+<p>:</p>
+<p>A_N B_N</p>
+<ul>
+  <li>On the 1st line, integer N(1≦N≦50) represents the number of operations that are included in one
+    set, and integer K(1≦K≦10^9) represents the number of sets. They are separated with a space.
+  <li>On the following N lines, the operations to perform are given. Each line contains two integers Ai, Bi
+    (1≦Ai, Bi≦8, Ai≠Bi) that represent the exchanges to be made. They are separated with a space.</li>
+</ul>
+
+<h3>Output</h3>
+<p>The output should be a single line with the number for each ball in their final order, with a space between
+  each number.</p>
+<p>Make sure to insert a line break at the end of the output.</p>
+<p>Do not put any extra space at the end of the output.</p>
+
+<h3>Answer:</h3>
 <%= form_with url: quiz_1_path do |form| %>
     <%= form.text_field :n, placeholder: 'N' %>
     <%= form.text_field :k, placeholder: 'K' %>
