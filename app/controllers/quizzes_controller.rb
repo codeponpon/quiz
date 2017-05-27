@@ -1,5 +1,6 @@
 ExceedException = Class.new(StandardError)
 DuplicatedException = Class.new(StandardError)
+EmptyParameterException = Class.new(StandardError)
 
 class QuizzesController < ApplicationController
   @@series = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -11,6 +12,10 @@ class QuizzesController < ApplicationController
   end
 
   def processing
+    raise EmptyParameterException if params[:a].reject{|i| i.empty?}.empty?
+    raise EmptyParameterException if params[:b].reject{|i| i.empty?}.empty?
+    raise ExceedException if params[:k].to_i.eql?(0)
+
     n = params[:n].to_i unless exceedLimitOfN?(params[:n].to_i)
     k = params[:k].to_i unless exceedLimitOfK?(params[:k].to_i)
 
@@ -21,8 +26,19 @@ class QuizzesController < ApplicationController
       @answer = reOrder(n, @answer)
       $stdout.flush
     end
-
     render js: "$('.result').html('#{@answer.join(' ')}')"
+  rescue Exception => e
+
+    case e.message
+      when 'ExceedException'
+        render js: "alert('Your input was exceed limit please read description carefully')"
+      when 'DuplicatedException'
+        render js: "alert('A and B were duplicated')"
+      when 'EmptyParameterException'
+        render js: "alert('There is some fields leave blank?')"
+      else
+        render js: "alert('Opps Something went wrong!')"
+    end
   end
 
   private

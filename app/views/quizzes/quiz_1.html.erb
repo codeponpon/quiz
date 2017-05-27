@@ -62,9 +62,11 @@
                     }
                 }
 
-                $('input[type=number]').not('.n').not('.k').on('keyup', function(){
+                $('input[type=number]').on('keyup', function(e){
+                    var code = e.keyCode || e.which;
+                    if(code == '9') return;
+
                     var hasError = false;
-                    console.log($(this).attr('name'));
                    if($(this).attr('name') == 'a[]') {
 
                       var bVal = $(this).next().val();
@@ -78,7 +80,7 @@
                           hasError = true;
                       }
                    }
-                   else {
+                   else if($(this).attr('name') == 'b[]') {
                      var aVal = $(this).prev().val();
                        if ($(this).val() == aVal){
                            alert('Number was duplicated');
@@ -95,6 +97,10 @@
                        $(this).val('');
                    }
                 });
+            });
+
+            $('form').on('ajax:error', function(e, xhr, status, error){
+              console.log(e, xhr, status, error);
             });
         });
     </script>
