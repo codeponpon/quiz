@@ -58,9 +58,43 @@
 
                     console.log(n, n_input);
                     for (i = n_input; i < n; i++){
-                        $('form .repeat-n').append('<li><input type="number" name="a[]"><input type="text" name="b[]"></li>')
+                        $('form .repeat-n').append('<li><input type="number" name="a[]"><input type="number" name="b[]"></li>')
                     }
                 }
+
+                $('input[type=number]').not('.n').not('.k').on('keyup', function(){
+                    var hasError = false;
+                    console.log($(this).attr('name'));
+                   if($(this).attr('name') == 'a[]') {
+
+                      var bVal = $(this).next().val();
+                      if ($(this).val() == bVal){
+                          alert('Number was duplicated');
+                          hasError = true;
+                      }
+
+                      if ($(this).val() == 0) {
+                          alert('The number cannot be zero!');
+                          hasError = true;
+                      }
+                   }
+                   else {
+                     var aVal = $(this).prev().val();
+                       if ($(this).val() == aVal){
+                           alert('Number was duplicated');
+                           hasError = true;
+                       }
+
+                       if ($(this).val() > 8) {
+                           alert('The number was exceed limit (>=8)');
+                           hasError = true;
+                       }
+                   }
+
+                   if (hasError) {
+                       $(this).val('');
+                   }
+                });
             });
         });
     </script>
